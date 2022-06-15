@@ -1,21 +1,28 @@
 # Projekt
 
-### Projekt zaliczeniowy sklepu internetowego
+### Final backend project
 
-- [ ] Prepare database
-- [ ] Routing
-- [ ] API for users
-- [ ] API for shop items
+- [x] Prepare database and connection
+- [x] Routing
+- [x] Models
+- [ ] Controllers
+- [ ] restAPI for products
+- [ ] restAPI for users
+- [ ] Authorization
 - [ ] CMS
+- [ ] Logs
 - [ ] Registration
 - [ ] Login
 - [ ] Session
-- [ ] Authorization
-- [ ] Basic UI
 - [ ] CMS
+- [ ] Payments
 - [ ] Errors
-- [ ] Logs
-- [ ] Search bar
-- [ ] Filters
-- [ ] Link Slugify
+- [ ] Searching
 - [ ] Documentation
+
+//additionals
+
+- [ ] Basic UI
+- [ ] Link Slugify
+- [ ] RabbitMQ
+- [ ] front covers
