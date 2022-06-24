@@ -6,14 +6,14 @@ const router = express.Router();
 function placeholderforcontroller() {}
 
 router
-  .route('')
-  .get(placeholderforcontroller)
-  .post(placeholderforcontroller);
+  .route('/')
+  .get(genreController.getAllGenres)
+  .post(genreController.addGenre);
 
 router
   .route('/:id')
-  .get(placeholderforcontroller)
-  .patch(placeholderforcontroller)
-  .delete(placeholderforcontroller);
+  .get(genreController.getGenreGenreById)
+  .patch(genreController.updateGenre)
+  .delete(genreController.deleteGenre);
 
 module.exports = router;

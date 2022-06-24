@@ -8,6 +8,7 @@ function placeholderforcontroller() {}
 router
   .route('')
   .get(placeholderforcontroller)
+  .get(trackController.getAllTracks)
   .post(placeholderforcontroller);
 
 router

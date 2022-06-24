@@ -6,13 +6,13 @@ function template() {}
 
 router
   .route('')
-  .get(template)
-  .post(template);
+  .get(publisherController.getAllPublishers)
+  .post(publisherController.addPublisher);
 
 router
   .route('/:id')
-  .get(template)
-  .patch(template)
-  .delete(template);
+  .get(publisherController.getPublisherById)
+  .patch(publisherController.updatePublisher)
+  .delete(publisherController.deletePublisher);
 
 module.exports = router;

@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const trackSchema = new mongoose.Schema({
   name: {
     type: String,
+    min: 1,
     maxlength: 30,
     required: true,
   },
@@ -32,5 +33,5 @@ const trackSchema = new mongoose.Schema({
   },
 });
 
-const track = mongoose.model(trackSchema);
-module.exports(track);
+const track = mongoose.model('Track', trackSchema);
+module.exports = track;

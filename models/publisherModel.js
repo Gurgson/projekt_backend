@@ -2,12 +2,13 @@ const mongoose = require('mongoose');
 const publisherSchema = new mongoose.Schema({
   name: {
     type: String,
-    minlength: 1,
-    maxlength: 30,
-    required: true,
+    maxlength: 50,
+    required: [true, 'Publisher name must be specified'],
     unique: true,
-  },
+    trim: true
+  }
 });
 
-const publisher = mongoose.model(publisherSchema);
-module.exports(publisher);
+const publisher = mongoose.model('Publisher', publisherSchema);
+
+module.exports = publisher;

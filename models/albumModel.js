@@ -3,21 +3,28 @@ const albumSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
+    trim: true
   },
   trackIds: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'tracks',
+    type: [mongoose.Schema.Types.ObjectId],
+    ref: 'tracks'
   },
   priceModifier: {
     type: Number,
+    default: 1,
     min: 1,
-    max: 70,
+    max: 70
   },
-  creationDate: {
+  createdAt: {
     type: Date,
     default: Date.now(),
-    max: Date.now(),
+    required: true
   },
+  createdBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  }
 });
-const user = mongoose.model(albumSchema);
+const album = mongoose.model(albumSchema);
 module.exports(album);

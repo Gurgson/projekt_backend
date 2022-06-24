@@ -8,16 +8,15 @@
 - [ ] Controllers
 - [ ] restAPI for products
 - [ ] restAPI for users
+- [ ] Errors
 - [ ] Authorization
-- [ ] CMS
 - [ ] Logs
 - [ ] Registration
 - [ ] Login
 - [ ] Session
-- [ ] CMS
 - [ ] Payments
-- [ ] Errors
 - [ ] Searching
+- [ ] Filtering
 - [ ] Documentation
 
 //additionals
