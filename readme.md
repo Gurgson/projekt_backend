@@ -6,22 +6,25 @@
 - [x] Routing
 - [x] Models
 - [ ] Controllers
-- [ ] restAPI for products
-- [ ] restAPI for users
-- [ ] Errors
+- [ ] Validators
 - [ ] Authorization
 - [ ] Logs
+- [ ] Hash passwords
 - [ ] Registration
 - [ ] Login
 - [ ] Session
-- [ ] Payments
 - [ ] Searching
 - [ ] Filtering
+- [ ] Pagination
+- [ ] API Projection
+- [ ] Hosting
 - [ ] Documentation
 
 //additionals
 
 - [ ] Basic UI
-- [ ] Link Slugify
+- [ ] Links Slugify
 - [ ] RabbitMQ
 - [ ] front covers
+- [ ] Payments
+- [ ] Multilanguage
