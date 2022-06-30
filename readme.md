@@ -12,11 +12,9 @@
 - [ ] Hash passwords
 - [ ] Registration
 - [ ] Login
-- [ ] Session
-- [ ] Searching
+- [ ] Sorting
 - [ ] Filtering
-- [ ] Pagination
-- [ ] API Projection
+- [ ] FieldLimiting
 - [ ] Hosting
 - [ ] Documentation
 

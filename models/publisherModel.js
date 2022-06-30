@@ -9,6 +9,6 @@ const publisherSchema = new mongoose.Schema({
   }
 });
 
-const publisher = mongoose.model('Publisher', publisherSchema);
+const Publisher = mongoose.model('Publisher', publisherSchema);
 
-module.exports = publisher;
+module.exports = Publisher;

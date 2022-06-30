@@ -7,14 +7,13 @@ function placeholderforcontroller() {}
 
 router
   .route('')
-  .get(placeholderforcontroller)
   .get(trackController.getAllTracks)
-  .post(placeholderforcontroller);
+  .post(trackController.addTrack);
 
 router
   .route('/:id')
-  .get(placeholderforcontroller)
-  .patch(placeholderforcontroller)
-  .delete(placeholderforcontroller);
+  .get(trackController.getTrackById)
+  .patch(trackController.updateTrack)
+  .delete(trackController.deleteTrack);
 
 module.exports = router;

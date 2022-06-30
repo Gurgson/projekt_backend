@@ -22,7 +22,6 @@ exports.getPublisherById = async (req, res) => {
     const publishers = await Publisher.findById(req.params.id);
     res.status(200).json({
       status: 'success',
-      results: publishers.length,
       data: {
         publishers
       }

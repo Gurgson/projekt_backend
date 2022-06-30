@@ -22,7 +22,6 @@ exports.getGenreGenreById = async (req, res) => {
     const genres = await Genre.findById(req.params.id);
     res.status(200).json({
       status: 'success',
-      results: genres.length,
       data: {
         genres
       }

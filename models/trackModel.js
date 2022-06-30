@@ -3,35 +3,36 @@ const trackSchema = new mongoose.Schema({
   name: {
     type: String,
     min: 1,
-    maxlength: 30,
+    maxlength: 50,
     required: true,
+    trim: true
   },
   genreIds: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'genres',
-    required: true,
+    type: [mongoose.Schema.Types.ObjectId],
+    ref: 'Genre',
+    required: true
   },
   publisherId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'publishers',
+    ref: 'Publisher'
   },
-  UserId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'users',
-    required: true,
-  },
+  // UserId: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: 'users',
+  //   required: true,
+  // },
   price: {
     type: Number,
     required: true,
-    min: 1,
+    min: 1
   },
   dateAdded: {
     type: Date,
     required: true,
     max: Date.now(),
-    default: Date.now(),
-  },
+    default: Date.now()
+  }
 });
 
-const track = mongoose.model('Track', trackSchema);
-module.exports = track;
+const Track = mongoose.model('Track', trackSchema);
+module.exports = Track;
