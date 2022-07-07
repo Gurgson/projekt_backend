@@ -1,6 +1,12 @@
 const mongoose = require('mongoose');
-
 const dotenv = require('dotenv');
+process.on('uncaughtException', (err) => {
+  console.log(err, '\n');
+  console.log(err.name, err.message);
+  console.log('Shutting down');
+
+  process.exit(1);
+});
 
 const app = require('./app');
 
@@ -8,7 +14,7 @@ dotenv.config({
   path: './config.env'
 });
 
-const port = process.env.port;
+const PORT = process.env.PORT;
 
 const DB = process.env.DATABASEURL.replace(
   '<password>',
@@ -23,6 +29,6 @@ mongoose
     console.log('db connect failed');
   });
 
-app.listen(port, () => {
-  console.log(`server running port: ${port}`);
+const server = app.listen(PORT, () => {
+  console.log(`server running port: ${PORT} in ${process.env.NODE_ENV} mode`);
 });

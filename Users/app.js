@@ -9,11 +9,15 @@ const app = express();
 if (process.env.NODE_ENV === 'production') {
   app.use(morgan('dev'));
 }
-// const userRouter = require('./routes/userRoutes');
-
 // Body parser
 app.use(express.json({ limit: '10kb' }));
-// app.use('/api/users/', userRouter);
+app.use((req, res, next) => {
+  req.requestTime = new Date().toISOString();
+  next();
+});
+//Routes
+const userRouter = require('./routes/userRoutes');
+app.use('/api/', userRouter);
 
 // Unhandled routes
 app.all('*', (req, res, next) => {
