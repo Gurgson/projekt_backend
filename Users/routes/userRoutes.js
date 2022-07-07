@@ -1,18 +1,9 @@
 const express = require('express');
+const authController = require('./../controllers/authController');
 const userController = require('./../controllers/userController');
-const router = express.Router();
+const router = express.Router(authController.signup);
 
-function template() {}
-
-router
-  .route('')
-  .get(template)
-  .post(template);
-
-router
-  .route('/:id')
-  .get(template)
-  .patch(template)
-  .delete(template);
-
+router.post('/signup', authController.signup);
+router.post('/login', authController.login);
+router.route('').get(authController.protect, userController.getAllUsers);
 module.exports = router;

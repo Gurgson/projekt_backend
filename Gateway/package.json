@@ -1,5 +1,5 @@
 {
-  "name": "projekt_backend",
+  "name": "projekt_backend-gateway",
   "version": "1.0.0",
   "description": "final project",
   "main": "server.js",
@@ -19,12 +19,10 @@
   },
   "homepage": "https://github.com/Gurgson/projekt_backend#readme",
   "dependencies": {
-    "bcryptjs": "^2.4.3",
     "dotenv": "^16.0.1",
-    "express": "^4.18.1",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.3.8",
     "morgan": "^1.10.0",
-    "validator": "^13.7.0"
+    "cookie-parser": "^1.4.6",
+    "express": "^4.18.1",
+    "express-http-proxy": "^1.6.3"
   }
 }
