@@ -1,5 +1,5 @@
 class APIfeatures {
-exludedFileds = ['page', 'sort', 'limit', 'fields'];
+  exludedFileds = ['page', 'sort', 'limit', 'fields'];
   constructor(query, queryString) {
     this.queryString = query;
     this.queryString = queryString;
@@ -31,13 +31,11 @@ exludedFileds = ['page', 'sort', 'limit', 'fields'];
     return this;
   }
   paginate() {
-      const page = this.queryString.page *1 ?? 1;
-      const limit = this.queryString.limit *1 ?? 20
-      const skip = (page - 1 ) * limit;
+    const page = this.queryString.page * 1 ?? 1;
+    const limit = this.queryString.limit * 1 ?? 20;
+    const skip = (page - 1) * limit;
 
-      this.query = query.skip(skip).limit(limit);
-      return this;
-    }
-    
+    this.query = query.skip(skip).limit(limit);
+    return this;
   }
 }

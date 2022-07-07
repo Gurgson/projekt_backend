@@ -2,10 +2,15 @@ const express = require('express');
 const albumController = require('./../controllers/albumController');
 const router = express.Router();
 
-function template() {}
+router
+  .route('')
+  .get(albumController.getAllAlbums)
+  .post(albumController.addAlbum);
 
-router.route('').post(template);
-
-router.route('/:id').get(template).patch(template).delete(template);
+router
+  .route('/:id')
+  .get(albumController.getAlbumById)
+  .patch(albumController.updateAlbum)
+  .delete(albumController.deleteAlbum);
 
 module.exports = router;

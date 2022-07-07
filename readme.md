@@ -5,24 +5,26 @@
 - [x] Prepare database and connection
 - [x] Routing
 - [x] Models
-- [ ] Controllers
+- [ ] Controllers (Useres Left)
 - [ ] Validators
 - [ ] Authorization
 - [ ] Logs
 - [ ] Hash passwords
 - [ ] Registration
 - [ ] Login
-- [ ] Sorting
-- [ ] Filtering
-- [ ] FieldLimiting
-- [ ] Hosting
+- [x] Sorting
+- [x] Filtering
+- [x] FieldLimiting
+- [x] Hosting
 - [ ] Documentation
 
 //additionals
 
-- [ ] Basic UI
 - [ ] Links Slugify
 - [ ] RabbitMQ
 - [ ] front covers
 - [ ] Payments
 - [ ] Multilanguage
+- [ ] Virtual property for caltulating album price
+- [ ] checking ids in refs
+- [ ] connect users with albums and tracks
