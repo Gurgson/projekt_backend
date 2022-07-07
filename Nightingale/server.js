@@ -7,6 +7,7 @@ const app = require('./app');
 dotenv.config({
   path: './config.env'
 });
+
 const port = process.env.port;
 
 const DB = process.env.DATABASEURL.replace(
