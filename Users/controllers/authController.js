@@ -3,10 +3,31 @@ const User = require('./../models/userModel');
 const catchAsync = require('./../utils/catchAssync');
 const jwt = require('jsonwebtoken');
 const AppError = require('./../utils/appError');
+const catchAssync = require('./../utils/catchAssync');
 
 const signToken = (id) => {
   return jwt.sign({ id: id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN
+  });
+};
+
+const createAndSendToken = (user, statusCode, res) => {
+  const token = signToken(user._id);
+  const cookieOptions = {
+    expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000),
+    httpOnly: true
+  };
+  if (process.env.NODE_ENV === 'production') {
+    cookie.option.secure = true;
+  }
+  user.password = null;
+  res.cookie('jwt', token, cookieOptions);
+  res.status(statusCode).json({
+    status: 'success',
+    token,
+    data: {
+      user
+    }
   });
 };
 exports.signup = catchAsync(async (req, res, next) => {
@@ -19,15 +40,7 @@ exports.signup = catchAsync(async (req, res, next) => {
     name: req.body.name,
     surname: req.body.surname
   });
-  const token = signToken(newUser._id);
-  newUser.password = null;
-  res.status(201).json({
-    status: 'success',
-    token,
-    data: {
-      user: newUser
-    }
-  });
+  createAndSendToken(newUser, 201, res);
 });
 exports.login = catchAsync(async (req, res, next) => {
   const email = req.body.email;
@@ -37,12 +50,7 @@ exports.login = catchAsync(async (req, res, next) => {
   const user = await User.findOne({ email: email }).select('+password');
   if (!user || !(await user.correctPassword(password, user.password)))
     return next(new AppError('Incorrect Email or Password', 401));
-  console.log(user._id);
-  const token = signToken(user._id);
-  res.status(200).json({
-    status: 'success',
-    token
-  });
+  createAndSendToken(user, 200, res);
 });
 exports.protect = catchAsync(async (req, res, next) => {
   let token;
@@ -61,6 +69,29 @@ exports.protect = catchAsync(async (req, res, next) => {
     return next(new AppError('User changed password, Please Login Again', 401));
   }
   req.user = isLogged;
-  console.log(isLogged);
   next();
+});
+exports.restricTo = (...roles) => {
+  return (req, res, next) => {
+    if (!roles.includes(req.users.role)) {
+      return next(new AppError("You don' You have no permissions to perform this action"), 403);
+    }
+    next();
+  };
+};
+exports.updatePassword = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.user.id).select('+password');
+  if (!user) {
+    return next(new AppError('Your account is not in database'), 401);
+  }
+
+  if (!(await user.correctPassword(req.body.currentPassword, user.password))) {
+    return next(new AppError('Wrong password'), 400);
+  }
+  console.log(req.body.newPassword, req.body.passwordConfirm);
+  user.password = req.body.newPassword;
+  user.passwordConfirm = req.body.passwordConfirm;
+  console.log(user);
+  await user.save();
+  createAndSendToken(user, 201, res);
 });
