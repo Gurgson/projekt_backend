@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js",
-    "start:prod": "NODE_ENV=production nodemon server.js"
+    "start:production": "SET NODE_ENV=production& nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -19,11 +19,18 @@
   },
   "homepage": "https://github.com/Gurgson/projekt_backend#readme",
   "dependencies": {
+    "axios": "^0.27.2",
+    "cookie-parser": "^1.4.6",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
+    "express-mongo-sanitize": "^2.2.0",
+    "express-rate-limit": "^6.4.0",
+    "helmet": "^5.1.0",
+    "hpp": "^0.2.3",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.3.8",
     "morgan": "^1.10.0",
-    "nodemon": "^2.0.19",
-    "validator": "^13.7.0"
+    "validator": "^13.7.0",
+    "xss-clean": "^0.1.1"
   }
 }

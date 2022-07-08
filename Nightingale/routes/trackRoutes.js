@@ -1,5 +1,6 @@
 const express = require('express');
 const trackController = require('./../controllers/trackController');
+const authController = require('./../controllers/authController');
 const router = express.Router();
 
 //placeholder
@@ -8,12 +9,12 @@ function placeholderforcontroller() {}
 router
   .route('')
   .get(trackController.getAllTracks)
-  .post(trackController.addTrack);
+  .post(authController.protect, trackController.addTrack);
 
 router
   .route('/:id')
   .get(trackController.getTrackById)
-  .patch(trackController.updateTrack)
-  .delete(trackController.deleteTrack);
+  .patch(authController.protect, trackController.updateTrack)
+  .delete(authController.protect, trackController.deleteTrack);
 
 module.exports = router;

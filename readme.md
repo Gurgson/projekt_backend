@@ -7,11 +7,10 @@
 - [x] Models
 - [ ] Controllers (Useres Left)
 - [ ] Validators
-- [ ] Authorization
-- [ ] Logs
-- [ ] Hash passwords
-- [ ] Registration
-- [ ] Login
+- [x] Authorization
+- [x] Hash passwords
+- [x] Registration
+- [x] Login
 - [x] Sorting
 - [x] Filtering
 - [x] FieldLimiting

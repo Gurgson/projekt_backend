@@ -40,12 +40,26 @@ const userSchema = new mongoose.Schema({
     required: [true, 'Please provide an email'],
     validate: [validator.isEmail, 'Please provide a valid email']
   },
-  passwordChangedAt: Date
+  passwordChangedAt: Date,
+  role: {
+    type: String,
+    enum: ['User', 'Admin'],
+    default: 'User'
+  },
+  active: {
+    type: Boolean,
+    default: true,
+    select: false
+  }
 });
 userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) return next();
   this.password = await bcrypt.hash(this.password, 14);
   this.passwordConfirm = undefined;
+  next();
+});
+userSchema.pre(/^find/, function (next) {
+  this.find({ active: true });
   next();
 });
 userSchema.methods.correctPassword = function (candidatePassword, userPassword) {

@@ -1,16 +1,17 @@
 const express = require('express');
 const albumController = require('./../controllers/albumController');
+const authController = require('./../controllers/authController');
 const router = express.Router();
 
 router
   .route('')
   .get(albumController.getAllAlbums)
-  .post(albumController.addAlbum);
+  .post(authController.protect, albumController.addAlbum);
 
 router
   .route('/:id')
   .get(albumController.getAlbumById)
-  .patch(albumController.updateAlbum)
-  .delete(albumController.deleteAlbum);
+  .patch(authController.protect, albumController.updateAlbum)
+  .delete(authController.protect, albumController.deleteAlbum);
 
 module.exports = router;

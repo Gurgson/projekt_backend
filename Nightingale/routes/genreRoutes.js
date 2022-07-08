@@ -1,19 +1,29 @@
 const express = require('express');
 const genreController = require('./../controllers/genreController');
+const authController = require('./../controllers/authController');
 const router = express.Router();
-
-//placeholder
-function placeholderforcontroller() {}
 
 router
   .route('/')
   .get(genreController.getAllGenres)
-  .post(genreController.addGenre);
+  .post(
+    authController.protect,
+    authController.restrictTo('Admin'),
+    genreController.addGenre
+  );
 
 router
   .route('/:id')
-  .get(genreController.getGenreGenreById)
-  .patch(genreController.updateGenre)
-  .delete(genreController.deleteGenre);
+  .get(authController.protect, genreController.getGenreGenreById)
+  .patch(
+    authController.protect,
+    authController.restrictTo('Admin'),
+    genreController.updateGenre
+  )
+  .delete(
+    authController.protect,
+    authController.restrictTo('Admin'),
+    genreController.deleteGenre
+  );
 
 module.exports = router;
