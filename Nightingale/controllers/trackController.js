@@ -43,10 +43,8 @@ exports.updateTrack = catchAsync(async (req, res) => {
 });
 exports.deleteTrack = catchAsync(async (req, res) => {
   const tracks = await Track.findByIdAndDelete(req.params.id);
-  res.status(201).json({
+  res.status(204).json({
     status: 'success',
-    data: {
-      tracks
-    }
+    data: null
   });
 });

@@ -39,7 +39,8 @@ const userSchema = new mongoose.Schema({
     lowercase: true,
     required: [true, 'Please provide an email'],
     validate: [validator.isEmail, 'Please provide a valid email']
-  }
+  },
+  passwordChangedAt: Date
 });
 userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) return next();
@@ -49,6 +50,14 @@ userSchema.pre('save', async function (next) {
 });
 userSchema.methods.correctPassword = function (candidatePassword, userPassword) {
   return bcrypt.compare(candidatePassword, userPassword);
+};
+userSchema.methods.changedPasswordAfter = function (JWTTimesstamp) {
+  if (this.passwordChangedAt) {
+    const changedTimestamp = parseInt(this.passwordChangedAt.getTime() / 1000, 10);
+    console.log(this.passwordChangedAt, JWTTimesStamp);
+    return JWTTimesstamp < changedTimestamp;
+  }
+  return false;
 };
 const User = mongoose.model('User', userSchema);
 module.exports = User;
