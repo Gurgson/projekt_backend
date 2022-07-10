@@ -30,10 +30,14 @@ exports.addGenre = catchAssync(async (req, res) => {
   });
 });
 exports.updateGenre = catchAssync(async (req, res) => {
-  const genres = await Genre.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-    runValidators: true
-  });
+  const genres = await Genre.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    {
+      new: true,
+      runValidators: true
+    }
+  );
   res.status(201).json({
     status: 'success',
     data: {

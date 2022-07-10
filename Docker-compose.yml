@@ -1,0 +1,28 @@
+version: '3'
+services:
+  users:
+    build: .\Users\
+    ports:
+      - '3002:3002'
+    depends_on:
+      - mongo
+  nightingale:
+    build: .\Nightingale\
+    ports:
+      - '3001:3001'
+    depends_on:
+      - mongo
+  gateway:
+    build: .\Gateway\
+    ports:
+      - '3000:3000'
+  mongo:
+    image: mongo:3.6.19-xenial
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongo-data:/data/db
+  
+volumes:
+  mongo-data:
+    driver: local

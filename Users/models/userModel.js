@@ -6,7 +6,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Please set your username'],
     minlength: [5, 'Your username has to have at least 5 characters'],
-    maxlength: [20, 'Your username has to have maximum 20 characters'],
+    maxlength: [
+      20,
+      'Your username has to have maximum 20 characters'
+    ],
     unique: true,
     trim: true
   },
@@ -18,14 +21,20 @@ const userSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: [true, 'Please provide password with at least 8 characters'],
+    required: [
+      true,
+      'Please provide password with at least 8 characters'
+    ],
     minlenth: [8, 'Your passwrod has to have at least 8 characters'],
     maxlenth: [20, 'Your password has to have maximum 20 characters'],
     select: false
   },
   passwordConfirm: {
     type: String,
-    required: [true, 'Please provide a matching password with at least 8 characters'],
+    required: [
+      true,
+      'Please provide a matching password with at least 8 characters'
+    ],
     validate: {
       validator: function (val) {
         return val === this.password;
@@ -59,15 +68,21 @@ userSchema.pre('save', async function (next) {
   next();
 });
 userSchema.pre(/^find/, function (next) {
-  this.find({ active: true });
+  this.find({ active: { $ne: false } });
   next();
 });
-userSchema.methods.correctPassword = function (candidatePassword, userPassword) {
+userSchema.methods.correctPassword = function (
+  candidatePassword,
+  userPassword
+) {
   return bcrypt.compare(candidatePassword, userPassword);
 };
 userSchema.methods.changedPasswordAfter = function (JWTTimesstamp) {
   if (this.passwordChangedAt) {
-    const changedTimestamp = parseInt(this.passwordChangedAt.getTime() / 1000, 10);
+    const changedTimestamp = parseInt(
+      this.passwordChangedAt.getTime() / 1000,
+      10
+    );
     console.log(this.passwordChangedAt, JWTTimesStamp);
     return JWTTimesstamp < changedTimestamp;
   }

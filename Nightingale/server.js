@@ -16,19 +16,22 @@ dotenv.config({
 
 const PORT = process.env.PORT;
 
-const DB = process.env.DATABASEURL.replace(
-  '<password>',
-  process.env.DBPASSWORD
-);
+// const DB = process.env.DATABASEURL.replace(
+//   '<password>',
+//   process.env.DBPASSWORD
+// );
+const DB = process.env.DBLOCAL;
 mongoose
   .connect(DB)
   .then(() => {
-    console.log('DB Connected');
+    console.log('DB ng connected');
   })
   .catch((error) => {
-    console.log('db connect failed');
+    console.log('DB ng connect failed');
   });
 
 const server = app.listen(PORT, () => {
-  console.log(`server running port: ${PORT} in ${process.env.NODE_ENV} mode`);
+  console.log(
+    `server n running port: ${PORT} in ${process.env.NODE_ENV} mode`
+  );
 });

@@ -3,8 +3,6 @@ const publisherController = require('./../controllers/publisherController');
 const authController = require('./../controllers/authController');
 const router = express.Router();
 
-function template() {}
-
 router
   .route('')
   .get(publisherController.getAllPublishers)
@@ -16,7 +14,11 @@ router
 
 router
   .route('/:id')
-  .get(authController.protect, publisherController.getPublisherById)
+  .get(
+    authController.protect,
+    authController.restrictTo('Admin'),
+    publisherController.getPublisherById
+  )
   .patch(
     authController.protect,
     authController.restrictTo('Admin'),

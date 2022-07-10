@@ -19,12 +19,11 @@ const albumSchema = new mongoose.Schema({
     type: Date,
     default: Date.now(),
     required: [true, 'Creation date has to be specified']
+  },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: [true, 'You must be logged in']
   }
-  // createdBy: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: 'User',
-  //   required: true
-  // }
 });
 albumSchema.pre(/^find/, function (next) {
   this.populate('trackIds');

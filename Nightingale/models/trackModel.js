@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const AppError = require('./../utils/appError');
 const trackSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -15,11 +16,10 @@ const trackSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Publisher'
   },
-  // UserId: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: 'users',
-  //   required: true,
-  // },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: [true, 'You must be logged in']
+  },
   price: {
     type: Number,
     required: [true, 'A track price must be specified'],

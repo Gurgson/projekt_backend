@@ -13,6 +13,7 @@ const cookieParser = require('cookie-parser');
 //security http
 app.use(helmet());
 //dev logging
+// console.log(process.env.DBLOCAL);
 if (process.env.NODE_ENV === 'production') {
   app.use(morgan('dev'));
 }
@@ -41,8 +42,12 @@ app.use('/api', limiter);
 
 //Routes
 const userRouter = require('./routes/userRoutes');
-app.use('/api/', userRouter);
 
+const devRouter = require('./routes/devRoutes');
+app.use('/api/', userRouter);
+if (process.env.NODE_ENV != 'production') {
+  app.use('/dev/', devRouter);
+}
 // Unhandled routes
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find route for ${req.originalUrl}`, 404));
