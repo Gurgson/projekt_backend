@@ -10,10 +10,7 @@ dotenv.config({
 
 const port = process.env.port;
 
-const DB = process.env.DATABASEURL.replace(
-  '<password>',
-  process.env.DBPASSWORD
-);
+const DB = process.env.DATABASEURL.replace('<password>', process.env.DBPASSWORD);
 mongoose
   .connect(DB)
   .then(() => {
@@ -24,5 +21,5 @@ mongoose
   });
 
 app.listen(port, () => {
-  console.log(`server running port: ${port}`);
+  console.log(`server running port: ${port} in ${process.env.NODE_ENV} mode`);
 });

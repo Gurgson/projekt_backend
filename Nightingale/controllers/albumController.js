@@ -1,9 +1,13 @@
 const Album = require('./../models/albumModel');
 const catchAsync = require('./../utils/catchAssync');
-
+const APIfeatures = require('./../utils/APIfeatures');
 exports.getAllAlbums = catchAsync(async (req, res) => {
-  const albums = await Album.find();
-
+  const features = new APIfeatures(Album.find(), req.query)
+    .filter()
+    .sort()
+    .limitFields()
+    .paginate();
+  const albums = await features.query;
   res.status(200).json({
     status: 'success',
     results: albums.length,
@@ -13,7 +17,6 @@ exports.getAllAlbums = catchAsync(async (req, res) => {
   });
 });
 exports.getAlbumById = catchAsync(async (req, res) => {
-  console.log(req.params.id);
   const album = await Album.findById(req.params.id);
   res.status(200).json({
     status: 'success',
@@ -30,10 +33,14 @@ exports.addAlbum = catchAsync(async (req, res) => {
   });
 });
 exports.updateAlbum = catchAsync(async (req, res) => {
-  const album = await Album.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-    runValidators: true
-  });
+  const album = await Album.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    {
+      new: true,
+      runValidators: true
+    }
+  );
   res.status(201).json({
     status: 'success',
     data: {
