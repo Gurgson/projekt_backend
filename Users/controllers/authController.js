@@ -115,7 +115,7 @@ exports.authenticateUser = catchAsync(async (req, res, next) => {
 
 exports.restrictTo = (...roles) => {
   return (req, res, next) => {
-    if (!roles.includes(req.users.role)) {
+    if (!roles.includes(req.user.role)) {
       return next(
         new AppError(
           "You don' You have no permissions to perform this action"

@@ -1,25 +1,31 @@
 const mongoose = require('mongoose');
-
 const dotenv = require('dotenv');
-
-const app = require('./app');
-
 dotenv.config({
   path: './config.env'
 });
+const app = require('./app');
 
-const port = process.env.port;
+const port = process.env.PORT;
 
-const DB = process.env.DATABASEURL.replace('<password>', process.env.DBPASSWORD);
+// const DB = process.env.DATABASEURL.replace(
+//   '<password>',
+//   process.env.DBPASSWORD
+// );
+
+const DB = process.env.DBLOCAL;
+console.log(DB);
 mongoose
-  .connect(DB)
+  .connect(DB, {
+    useNewUrlParser: true
+  })
   .then(() => {
-    console.log('DB Connected');
+    console.log('DB ng_users Connected');
   })
   .catch((error) => {
-    console.log('db connect failed');
+    console.log('DB ng_sers connect failed');
   });
-
 app.listen(port, () => {
-  console.log(`server running port: ${port} in ${process.env.NODE_ENV} mode`);
+  console.log(
+    `server users running port: ${port} in ${process.env.NODE_ENV} mode`
+  );
 });

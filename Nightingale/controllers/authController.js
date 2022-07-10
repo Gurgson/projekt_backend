@@ -11,18 +11,15 @@ exports.protect = catchAsync(async (req, res, next) => {
       )
     );
   const response = await axios.get(
-    'http://127.0.0.1:3002/users/api/authentcateUserWithJWT/' +
+    'http://gateway:3000/users/api/authentcateUserWithJWT/' +
       req.cookies.jwt
   );
   req.user = response.data.data;
-  console.log(req.user);
   next();
 });
 exports.restrictTo = (...roles) => {
   return (req, res, next) => {
     if (!roles.includes(req.user.role)) {
-      console.log(req.user);
-      console.log(req.user.role);
       return next(
         new AppError(
           "You don' You have no permissions to perform this action"

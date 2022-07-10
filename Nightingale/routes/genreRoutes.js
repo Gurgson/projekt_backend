@@ -14,7 +14,11 @@ router
 
 router
   .route('/:id')
-  .get(authController.protect, genreController.getGenreGenreById)
+  .get(
+    authController.protect,
+    authController.restrictTo('Admin'),
+    genreController.getGenreGenreById
+  )
   .patch(
     authController.protect,
     authController.restrictTo('Admin'),

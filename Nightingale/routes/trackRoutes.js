@@ -14,7 +14,15 @@ router
 router
   .route('/:id')
   .get(trackController.getTrackById)
-  .patch(authController.protect, trackController.updateTrack)
-  .delete(authController.protect, trackController.deleteTrack);
+  .patch(
+    authController.protect,
+    trackController.ifItsYours,
+    trackController.updateTrack
+  )
+  .delete(
+    authController.protect,
+    trackController.ifItsYours,
+    trackController.deleteTrack
+  );
 
 module.exports = router;
