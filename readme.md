@@ -2,7 +2,8 @@
 
 ### Final backend project
 
-#-Checlist-
+My take on creating segmentet app, where each app comuunicate with each other.
+-Checlist-
 
 - [x] Prepare database and connection
 - [x] Routing
