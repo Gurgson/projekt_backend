@@ -2,6 +2,8 @@
 
 ### Final backend project
 
+#-Checlist-
+
 - [x] Prepare database and connection
 - [x] Routing
 - [x] Models
