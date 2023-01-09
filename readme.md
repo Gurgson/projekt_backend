@@ -3,6 +3,7 @@
 ### Final backend project
 
 My take on creating segmentet app, where each app comuunicate with each other.
+
 -Checlist-
 
 - [x] Prepare database and connection
